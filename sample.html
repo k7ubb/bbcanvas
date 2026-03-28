@@ -1,0 +1,74 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>bbcanvas sample</title>
+</head>
+
+<body>
+<canvas id="canvas" width="640" height="480"></canvas>
+
+<script type="text/javascript" src="bbcanvas.js"></script>
+<script type="text/javascript">
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+
+// ctx.fillStyle = '#eeeeee';
+// ctx.fillRect(0, 0, 640, 480);
+// ctx.fillStyle = '#ffffff';
+// ctx.fillRect(20, 20, 600, 440);
+ctx.bbFill({ rect: [0,0, 640, 480] }, '#eeeeee');
+ctx.bbFill({ rect: [20, 20, 600, 440] }, '#ffffff');
+
+// ctx.fillStyle = '#ff0000';
+// ctx.beginPath();
+// ctx.arc(100, 100, 50, 0, 2 * Math.PI);
+// ctx.fill();
+ctx.bbFill({ center: {x: 100, y: 100}, radius: 50 }, '#ff0000');
+
+// ctx.fillStyle = '#000000';
+// ctx.font = '24px sans-serif';
+// ctx.textBaseline = 'top';
+// ctx.fillText('Hello, ', 60, 400);
+// const offset = ctx.measureText('Hello, ').width;
+// ctx.fillText('World!', 60 + offset, 400);
+ctx.bbText('Hello, ', 60, 400, { size: 24, color: '#000000' });
+const offset = ctx.bbMeasureText('Hello, ', { size: 24 });
+ctx.bbText('World!', 60 + offset, 400, { size: 24, color: '#000000' })
+
+// ctx.fillStyle = '#808000';
+// ctx.lineWidth = 4;
+// ctx.beginPath();
+// ctx.moveTo(352, 60);
+// ctx.lineTo(374, 140);
+// ctx.lineTo(462, 140);
+// ctx.lineTo(385, 190);
+// ctx.lineTo(407, 270);
+// ctx.lineTo(352, 220);
+// ctx.lineTo(297, 270);
+// ctx.lineTo(318, 190);
+// ctx.lineTo(242, 140);
+// ctx.lineTo(330, 140);
+// ctx.closePath();
+// ctx.fill();
+ctx.bbFill(
+	{
+		points: [[352, 60], [374, 140], [462, 140], [385, 190], [407, 270], [352, 220], [297, 270], [318, 190], [242, 140], [330, 140]]
+	},
+	'#ffff00'
+);
+
+ctx.bbStroke(
+	{
+		rect: [300, 300, 200, 100],
+		radius: 20,
+	},
+	{ width: 4, color: '#00ff00' }
+)
+</script>
+
+</body>
+</html>
